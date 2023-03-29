@@ -7,4 +7,7 @@ ENTRYPOINT []
 
 COPY ./entrypoint.sh /
 RUN chmod +x /entrypoint.sh
+
+EXPOSE 5000/tcp
+
 CMD ["/entrypoint.sh"]
