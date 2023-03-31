@@ -9,6 +9,8 @@
 
 ### What is n8n?
 
+[n8n](https://n8n.io/) is an extendable workflow automation tool. With a fair-code distribution model.
+
 ### What is Dokku?
 
 [Dokku](http://dokku.viewdocs.io/dokku/) is the smallest PaaS implementation you've ever seen - _Docker
@@ -16,6 +18,7 @@ powered mini-Heroku_.
 
 ### Requirements
 * A working [Dokku host](http://dokku.viewdocs.io/dokku/getting-started/installation/)
+* [PostgreSQL](https://github.com/dokku/dokku-postgres) plugin for Dokku
 * [Letsencrypt](https://github.com/dokku/dokku-letsencrypt) plugin for SSL (optionnal)
 
 # Setup
@@ -32,6 +35,15 @@ dokku apps:create n8n
 
 ## Configuration
 
+### Setting encryption key
+```bash
+dokku config:set n8n N8N_ENCRYPTION_KEY=$(echo `openssl rand -base64 45` | tr -d \=+ | cut -c 1-32)
+```
+
+### Setting webhook url
+```bash
+dokku config:set n8n WEBHOOK_URL=http://n8n.example.com
+```
 
 ## Domain setup
 
