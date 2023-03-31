@@ -81,7 +81,7 @@ git remote add dokku dokku@example.com:n8n
 
 ### Push n8n
 
-Now we can push n8n to Dokku (_before_ moving on to the [next part](#domain-and-ssl-certificate)).
+Now we can push n8n to Dokku (_before_ moving on to the [next part](#ssl-certificate)).
 
 ```bash
 git push dokku master
