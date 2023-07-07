@@ -8,7 +8,7 @@ echo -e "\033[0;32m====>\033[0m Initial check..."
 CURRENT_RELEASE=$(git tag | tail -1)
 
 # Get lastest release name
-RELEASE=$(curl -s https://api.github.com/repos/n8n-io/n8n/releases/latest | jq -r ".tag_name")
+RELEASE=$(curl -s https://api.github.com/repos/n8n-io/n8n/releases/latest | jq -r ".tag_name" | sed 's/n8n@//g; s/\"//g')
 
 # Exit script if already up to date
 if [ $RELEASE = $CURRENT_RELEASE ]; then
