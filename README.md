@@ -35,6 +35,14 @@ dokku apps:create n8n
 
 ## Configuration
 
+### Database setup 
+
+```
+sudo dokku plugin:install https://github.com/dokku/dokku-postgres.git postgres
+dokku postgres:create n8n
+dokku postgres:link n8n n8n
+```
+
 ### Setting encryption key
 ```bash
 dokku config:set n8n N8N_ENCRYPTION_KEY=$(echo `openssl rand -base64 45` | tr -d \=+ | cut -c 1-32)
@@ -45,13 +53,14 @@ dokku config:set n8n N8N_ENCRYPTION_KEY=$(echo `openssl rand -base64 45` | tr -d
 dokku config:set n8n WEBHOOK_URL=http://n8n.example.com
 ```
 
-## Domain setup
+### Domain setup
 
 To get the routing working, we need to apply a few settings. First we set the domain.
 
 ```bash
 dokku domains:set n8n n8n.example.com
 ```
+
 
 ## Push n8n to Dokku
 
