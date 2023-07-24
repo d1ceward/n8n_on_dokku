@@ -23,11 +23,11 @@ powered mini-Heroku_.
 
 # Setup
 
-**Note:** We are going to use the domain `n8n.example.com` for demonstration purposes. Make sure to replace
-it to your domain name.
+**Note:** Throughout this guide, we will use the domain `n8n.example.com` for demonstration purposes. Make sure to replace it with your actual domain name.
 
 ## Create the app
-Log onto your Dokku Host to create the n8n app:
+
+Log into your Dokku host and create the n8n app:
 
 ```bash
 dokku apps:create n8n
@@ -35,54 +35,60 @@ dokku apps:create n8n
 
 ## Configuration
 
-### Database setup 
+### Install, create and link PostgreSQL plugin
 
+```bash
+# Install postgres plugin on Dokku
+dokku plugin:install https://github.com/dokku/dokku-postgres.git postgres
 ```
-sudo dokku plugin:install https://github.com/dokku/dokku-postgres.git postgres
-dokku postgres:create n8n
-dokku postgres:link n8n n8n
+
+```bash
+# Create running plugin
+dokku postgres:create grafana
+```
+
+```bash
+# Link plugin to the main app
+dokku postgres:link grafana grafana
 ```
 
 ### Setting encryption key
+
 ```bash
 dokku config:set n8n N8N_ENCRYPTION_KEY=$(echo `openssl rand -base64 45` | tr -d \=+ | cut -c 1-32)
 ```
 
 ### Setting webhook url
+
 ```bash
 dokku config:set n8n WEBHOOK_URL=http://n8n.example.com
 ```
 
-### Domain setup
+## Domain setup
 
-To get the routing working, we need to apply a few settings. First we set the domain.
+To enable routing for the n8n app, we need to configure the domain. Execute the following command:
 
 ```bash
 dokku domains:set n8n n8n.example.com
 ```
 
-
 ## Push n8n to Dokku
 
 ### Grabbing the repository
 
-First clone this repository onto your machine.
-
-#### Via SSH
+Begin by cloning this repository onto your local machine.
 
 ```bash
+# Via SSH
 git clone git@github.com:d1ceward/n8n_on_dokku.git
-```
 
-#### Via HTTPS
-
-```bash
+# Via HTTPS
 git clone https://github.com/d1ceward/n8n_on_dokku.git
 ```
 
 ### Set up git remote
 
-Now you need to set up your Dokku server as a remote.
+Now, set up your Dokku server as a remote repository.
 
 ```bash
 git remote add dokku dokku@example.com:n8n
@@ -90,7 +96,7 @@ git remote add dokku dokku@example.com:n8n
 
 ### Push n8n
 
-Now we can push n8n to Dokku (_before_ moving on to the [next part](#ssl-certificate)).
+Now, you can push the n8n app to Dokku. Ensure you have completed this step before moving on to the [next section](#ssl-certificate).
 
 ```bash
 git push dokku master
@@ -98,14 +104,14 @@ git push dokku master
 
 ## SSL certificate
 
-Last but not least, we can go an grab the SSL certificate from [Let's Encrypt](https://letsencrypt.org/).
+Lastly, let's obtain an SSL certificate from [Let's Encrypt](https://letsencrypt.org/).
 
 ```bash
 # Install letsencrypt plugin
 dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
 
 # Set certificate contact email
-dokku config:set --no-restart n8n DOKKU_LETSENCRYPT_EMAIL=you@example.com
+dokku letsencrypt:set n8n email you@example.com
 
 # Generate certificate
 dokku letsencrypt:enable n8n
@@ -113,4 +119,4 @@ dokku letsencrypt:enable n8n
 
 ## Wrapping up
 
-Your n8n instance should now be available on [https://n8n.example.com](https://n8n.example.com).
+Congratulations! Your n8n instance is now up and running, and you can access it at [https://n8n.example.com](https://n8n.example.com).
