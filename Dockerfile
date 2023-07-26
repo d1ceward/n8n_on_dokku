@@ -12,3 +12,5 @@ RUN chown node:node /docker-entrypoint.sh && \
 USER node
 
 EXPOSE 5000/tcp
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
