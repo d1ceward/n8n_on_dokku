@@ -2,14 +2,13 @@ ARG N8N_VERSION="1.0.5"
 
 FROM n8nio/n8n:${N8N_VERSION}
 
+USER root
+
+COPY ./entrypoint.sh /docker-entrypoint.sh
+
+RUN chown node:node /docker-entrypoint.sh && \
+    chmod +x /docker-entrypoint.sh
+
 USER node
 
-WORKDIR /home/node/packages/cli
-ENTRYPOINT []
-
-COPY ./entrypoint.sh /
-RUN chmod +x /entrypoint.sh
-
 EXPOSE 5000/tcp
-
-CMD ["/entrypoint.sh"]
