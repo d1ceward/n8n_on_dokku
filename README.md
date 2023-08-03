@@ -44,12 +44,12 @@ dokku plugin:install https://github.com/dokku/dokku-postgres.git postgres
 
 ```bash
 # Create running plugin
-dokku postgres:create grafana
+dokku postgres:create n8n
 ```
 
 ```bash
 # Link plugin to the main app
-dokku postgres:link grafana grafana
+dokku postgres:link n8n n8n
 ```
 
 ### Setting encryption key
