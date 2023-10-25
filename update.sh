@@ -5,7 +5,7 @@ git pull
 echo -e "\033[0;32m====>\033[0m Initial check..."
 
 # Get current release name
-CURRENT_RELEASE=$(git tag | tail -1)
+CURRENT_RELEASE=$(git tag --sort=version:refname | tail -1)
 
 # Get lastest release name
 RELEASE=$(curl -s https://api.github.com/repos/n8n-io/n8n/releases/latest | jq -r ".tag_name" | sed 's/n8n@//g; s/\"//g')
