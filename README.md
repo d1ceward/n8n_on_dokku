@@ -2,7 +2,7 @@
 
 [![n8n](https://img.shields.io/badge/n8n-1.74.1-blue.svg)](https://github.com/n8n-io/n8n/releases/tag/n8n%401.74.1)
 [![Dokku](https://img.shields.io/badge/Dokku-Repo-blue.svg)](https://github.com/dokku/dokku)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/d1ceward/minio_on_dokku/graphs/commit-activity)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/d1ceward-on-dokku/minio_on_dokku/graphs/commit-activity)
 # Run n8n on Dokku
 
 ## Perquisites
@@ -80,10 +80,10 @@ Begin by cloning this repository onto your local machine.
 
 ```bash
 # Via SSH
-git clone git@github.com:d1ceward/n8n_on_dokku.git
+git clone git@github.com:d1ceward-on-dokku/n8n_on_dokku.git
 
 # Via HTTPS
-git clone https://github.com/d1ceward/n8n_on_dokku.git
+git clone https://github.com/d1ceward-on-dokku/n8n_on_dokku.git
 ```
 
 ### Set up git remote
